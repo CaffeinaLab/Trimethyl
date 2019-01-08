@@ -241,6 +241,7 @@ module.exports = function(args) {
 
 		/**
 		 * **Android specific**
+		 * Set the action button for this window
 		 * @method  setActivityButton
 		 * @param {Object} opt
 		 */
@@ -250,11 +251,36 @@ module.exports = function(args) {
 			$this.addActivityButton(opt);
 		};
 
+		/**
+		 * **Android specific**
+		 * Set the action buttons for this window
+		 * @method  setActivityButtons
+		 * @param {Array} buttons An Array of buttons activity buttons
+		 */
+		$this.setActivityButtons = function(buttons) {
+			activityButtons = [];
+			$this.menuItems = {};
+
+			if (buttons != null && buttons.length > 0) {
+				_.each(buttons, function(btn) {
+					activityButtons.push(btn);
+				});
+			}
+
+			if (_.isFunction($this.activity.invalidateOptionsMenu)) $this.activity.invalidateOptionsMenu();
+		};
+
  		/**
  		 * @method setRightNavButton
  		 * @see {@link setActivityButton}
  		 */
 		$this.setRightNavButton = $this.setActivityButton;
+
+		/**
+ 		 * @method setRightNavButtons
+ 		 * @see {@link setActivityButtons}
+ 		 */
+		$this.setRightNavButtons = $this.setActivityButtons;
 
 
 		/**
